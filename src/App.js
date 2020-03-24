@@ -6,15 +6,17 @@ import Button from '@material-ui/core/Button'
 import SideBar from './SideBar'
 import MenuBar from './MenuBar'
 
-function App() {
-  return (
+class App extends React.Component {
+  render() {
+    return(
     <div className="App">
       {/*<Button variant="contained" color="primary">
         Hello World
   </Button>*/}
       <MenuBar></MenuBar>
     </div>
-  );
+    )
+  }
 }
 
 export default App;
