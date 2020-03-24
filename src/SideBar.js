@@ -5,10 +5,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Dimensions from './Dimensions'
+import useWindowDimensions from './Dimensions';
+import MediaCard from './MediaCard'
+import Grid from '@material-ui/core/Grid';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+  const classes = useStyles();
   return (
     <Typography
       component="div"
@@ -16,6 +20,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
+      className = {classes.typography}
       {...other}
     >
       {value === index && <Box p={3}>{children}</Box>}
@@ -33,17 +38,23 @@ function a11yProps(index) {
     'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
-
+const Component = () => {
+  const {height,width} = useWindowDimensions();
+}
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: 224,
+    height: 1000,
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
+    width: 200,
   },
+  typography:{
+    width: 1100
+  }
 }));
 
 export default function VerticalTabs(){
@@ -55,44 +66,62 @@ export default function VerticalTabs(){
   };
 
   return (
-    <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabs}
-      >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
-    </div>
+    <Grid>
+        <div className={classes.root}>
+        <Tabs
+            orientation="vertical"
+            variant="scrollable"
+            value={50}
+            indicatorColor="secondary"
+            textColor="secondary"
+            onChange={handleChange}
+            aria-label="Vertical tabs example"
+            className={classes.tabs}
+        >
+            <Tab label="Smoothness" {...a11yProps(0)} />
+            <Tab label="Roughness" {...a11yProps(1)} />
+            <Tab label="Softness" {...a11yProps(2)} />
+            <Tab label="Hardness" {...a11yProps(3)} />
+            <Tab label="Wetness" {...a11yProps(4)} />
+            <Tab label="Dryness" {...a11yProps(5)} />
+            <Tab label="Viscosity" {...a11yProps(6)} />
+            <Tab label="Oiliness" {...a11yProps(7)} />
+        </Tabs>
+            <TabPanel value={value} index={0}>
+                <Grid container spacing = {2}>
+                    <Grid item xs>
+                        <MediaCard title="lizard"/>
+                    </Grid>
+                    <Grid item xs>
+                        <MediaCard/>
+                    </Grid>
+                    <Grid item xs>
+                        <MediaCard/>
+                    </Grid>
+                    <Grid item xs>
+                        <MediaCard/>
+                    </Grid>
+                </Grid>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                Item Two
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                Item Three
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                Item Four
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                Item Five
+            </TabPanel>
+            <TabPanel value={value} index={5}>
+                Item Six
+            </TabPanel>
+            <TabPanel value={value} index={6}>
+                Item Seven
+            </TabPanel>
+        </div>
+    </Grid>
   );
 }
