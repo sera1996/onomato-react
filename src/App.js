@@ -5,27 +5,11 @@ import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button'
 import SideBar from './SideBar'
 import MenuBar from './MenuBar'
-
+import {connect} from 'react-redux'
+import {readEvents} from './actions'
 class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      category: [],
-    }
-  }
   componentDidMount(){
-    fetch('http://localhost:3030/categories',{
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type":"application/json"
-      }
-    })
-    .then(response => {
-      return response.json();
-    }).then(data => console.log(data)
-    );
-    /*console.log()*/
+    this.props.readEvents()
   }
   render() {
     return(
@@ -39,4 +23,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({})
+const mapDispatchToProps = ({readEvents})
+export default connect(mapStateToProps, mapDispatchToProps)(App);
