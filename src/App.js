@@ -7,6 +7,26 @@ import SideBar from './SideBar'
 import MenuBar from './MenuBar'
 
 class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      category: [],
+    }
+  }
+  componentDidMount(){
+    fetch('http://localhost:3030/categories',{
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type":"application/json"
+      }
+    })
+    .then(response => {
+      return response.json();
+    }).then(data => console.log(data)
+    );
+    /*console.log()*/
+  }
   render() {
     return(
     <div className="App">
