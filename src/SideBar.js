@@ -72,7 +72,9 @@ class SideBar extends React.Component{
   render(){
     const props = this.props;
     return(
-      <VerticalTabs props = {props}></VerticalTabs>
+      <div>
+        <VerticalTabs props = {props}></VerticalTabs>
+      </div>
     )
   }
 }
@@ -83,7 +85,7 @@ function VerticalTabs(props){
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(props.props.events);
+  //console.log(props.props.events);
     return (
       <Grid>
           <div className={classes.root}>
@@ -97,14 +99,9 @@ function VerticalTabs(props){
               aria-label="Vertical tabs example"
               className={classes.tabs}
           >
-              <Tab label="Smoothness" {...a11yProps(0)} />
-              <Tab label="Roughness" {...a11yProps(1)} />
-              <Tab label="Softness" {...a11yProps(2)} />
-              <Tab label="Hardness" {...a11yProps(3)} />
-              <Tab label="Wetness" {...a11yProps(4)} />
-              <Tab label="Dryness" {...a11yProps(5)} />
-              <Tab label="Viscosity" {...a11yProps(6)} />
-              <Tab label="Oiliness" {...a11yProps(7)} />
+            {_.map(props.props.events,event=>(
+              <Tab label={event.name} {...a11yProps(0)} />
+            ))}
           </Tabs>
               <TabPanel value={value} index={0}>
                   <Grid container spacing = {3}>
@@ -118,34 +115,6 @@ function VerticalTabs(props){
                           <MediaCard title="つるつる"/>
                       </Grid>
                   </Grid>
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-              <Grid container spacing = {3}>
-                    <Grid item xs={3}>
-                        <MediaCard title="がさがさ" description = "湿り気や粘り気がない様子。滑らかで好ましい程度に乾燥している様子。"/>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <MediaCard title="ざらざら"/>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <MediaCard title="でこぼこ"/>
-                    </Grid>
-                </Grid>
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                  Item Three
-              </TabPanel>
-              <TabPanel value={value} index={3}>
-                  Item Four
-              </TabPanel>
-              <TabPanel value={value} index={4}>
-                  Item Five
-              </TabPanel>
-              <TabPanel value={value} index={5}>
-                  Item Six
-              </TabPanel>
-              <TabPanel value={value} index={6}>
-                  Item Seven
               </TabPanel>
           </div>
       </Grid>
