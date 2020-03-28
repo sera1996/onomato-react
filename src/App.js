@@ -12,6 +12,7 @@ class App extends React.Component {
     this.props.readEvents()
   }
   render() {
+    const props = this.props;
     return(
     <div className="App">
       {/*<Button variant="contained" color="primary">
@@ -23,6 +24,6 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({events: state.events})
 const mapDispatchToProps = ({readEvents})
 export default connect(mapStateToProps, mapDispatchToProps)(App);

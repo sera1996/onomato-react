@@ -10,6 +10,9 @@ import useWindowDimensions from './Dimensions';
 import MediaCard from './MediaCard'
 import Grid from '@material-ui/core/Grid';
 import { render } from '@testing-library/react';
+import {connect} from 'react-redux'
+import {readEvents} from './actions'
+import _ from 'lodash'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,13 +60,30 @@ const useStyles = makeStyles(theme => ({
     width: 1100
   }
 }));
-export default function VerticalTabs(){
+class SideBar extends React.Component{
+  componentDidMount(){
+    this.props.readEvents()
+  }
+  renderEvents(){
+    return _.map(this.props.events,event => (
+      console.log(event.id)
+    ))
+  }
+  render(){
+    const props = this.props;
+    return(
+      <VerticalTabs props = {props}></VerticalTabs>
+    )
+  }
+}
+function VerticalTabs(props){
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  console.log(props.props.events);
     return (
       <Grid>
           <div className={classes.root}>
@@ -131,3 +151,6 @@ export default function VerticalTabs(){
       </Grid>
     );
 }
+const mapStateToProps = state => ({events: state.events})
+const mapDispatchToProps = ({readEvents})
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
