@@ -92,7 +92,7 @@ function VerticalTabs(props){
           <Tabs
               orientation="vertical"
               variant="scrollable"
-              value={50}
+              value={2}
               indicatorColor="secondary"
               textColor="secondary"
               onChange={handleChange}
@@ -100,22 +100,34 @@ function VerticalTabs(props){
               className={classes.tabs}
           >
             {_.map(props.props.events,event=>(
-              <Tab label={event.name} {...a11yProps(0)} />
+              <Tab label={event.name} {...a11yProps(event.id)} />
             ))}
-          </Tabs>
-              <TabPanel value={value} index={0}>
-                  <Grid container spacing = {3}>
-                      <Grid item xs={3}>
-                          <MediaCard title="さらさら" description = "湿り気や粘り気がない様子。滑らかで好ましい程度に乾燥している様子。"/>
-                      </Grid>
-                      <Grid item xs={3}>
-                          <MediaCard title="すべすべ"/>
-                      </Grid>
-                      <Grid item xs={3}>
-                          <MediaCard title="つるつる"/>
-                      </Grid>
-                  </Grid>
+            {_.map(props.props.events,event=>(
+
+              <TabPanel value={value} index = {0}>
+                <Grid container spacing = {3}>
+                  {_.map(event.onomatopoeium,onomato => (
+                    console.log(onomato.name)
+                  ))}
+                </Grid>
               </TabPanel>
+            ))}
+            {/*{console.log(props.props.events)}*/}
+          </Tabs>
+            {/*<TabPanel value={value} index={0}>
+                <Grid container spacing = {3}>
+                    <Grid item xs={3}>
+                        <MediaCard title="さらさら" description = "湿り気や粘り気がない様子。滑らかで好ましい程度に乾燥している様子。"/>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <MediaCard title="すべすべ"/>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <MediaCard title="つるつる"/>
+                    </Grid>
+                </Grid>
+            </TabPanel>
+            */}
           </div>
       </Grid>
     );
