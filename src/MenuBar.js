@@ -62,7 +62,7 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <SideBar></SideBar>e
+        <SideBar></SideBar>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

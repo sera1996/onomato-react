@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import { render } from '@testing-library/react';
 import {connect} from 'react-redux'
 import {readEvents} from './actions'
+import OnomatoList from './OnomatoList'
 import _ from 'lodash'
 
 function TabPanel(props) {
@@ -112,8 +113,9 @@ function VerticalTabs(props){
                     </Grid>
                   ))}
                 </Grid>
-              </TabPanel>
-            ))}
+                  </TabPanel>
+                  ))}
+                  {/*<OnomatoList/>*/}
           </div>
       </Grid>
     );
