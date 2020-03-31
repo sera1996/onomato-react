@@ -66,27 +66,29 @@ class OnomatoList extends React.Component{
     render(){
         const props = this.props;
         return(
-            <OnomatoComponent props={props.events}/>
+          <OnomatoComponent props = {props}/>
+          /*<p>{_.map(props.events, event => (
+            console.log(event.onomatopoeium)
+          ))}</p>*/
         )
     };
 }
 
-function OnomatoComponent(props){
-    const [value, setValue] = React.useState(0);
-    return(
-        _.map(props.events,event=>(
+function OnomatoComponent(events){
+      const [value, setValue] = React.useState(0);
+      return(
+          _.map(events.props.events,event => (
             <TabPanel value={value} index={event.id-1}>
               <Grid container spacing ={3}>
-                {_.map(event.onomatopoeium,onomato => (
+                {_.map(event.onomatopoeium, onomato => (
                   <Grid item xs = {3}>
-                    <MediaCard title={onomato.name} description = {onomato.description} />
+                    <MediaCard title={onomato.name} description = {onomato.description} image = "/images/food_natto.png"/>
                   </Grid>
                 ))}
               </Grid>
             </TabPanel>
           ))
-    )
-
+      )
 
 }
 const mapStateToProps = state => ({events: state.events})
